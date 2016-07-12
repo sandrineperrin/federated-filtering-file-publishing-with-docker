@@ -6,6 +6,7 @@ TARGET_FQDN=$(hostname -I | sed 's/ /\n/g' | grep    172.17 | head -n 1)
 TARGET_PORT=${TARGET_PORT:-8080}
 TARGET_PATH=${TARGET_PATH:-Insyght/}
 DEAMON_OR_ITERACTIVE=${DEAMON_OR_ITERACTIVE:-d}
+SUDO_CMD=${SUDO_CMD:-sudo}
 
 sudo mkdir -p /var/log/httpd-federated-filtering-proxy
 
