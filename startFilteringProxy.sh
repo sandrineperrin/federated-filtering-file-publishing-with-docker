@@ -12,7 +12,7 @@ $SUDO_CMD mkdir -p /var/log/httpd-federated-filtering-proxy
 
 $SUDO_CMD service docker start
 
-if [ "$ALLOWED_EMAIL_COMMA_SEPARATED_VALUES" != "" ]
+if [ "$ALLOWED_EMAIL_SPACE_SEPARATED_VALUES" != "" ]
 then
     rm ./apache_groups
 fi
@@ -25,18 +25,18 @@ echo $TARGET_PORT
 echo $TARGET_PATH
 echo $DEAMON_OR_ITERACTIVE
 echo $SUDO_CMD
-echo $ALLOWED_EMAIL_COMMA_SEPARATED_VALUES
+echo $ALLOWED_EMAIL_SPACE_SEPARATED_VALUES
 
 if [ ! -e ./apache_groups ]
 then
 
   #ALLOWED_EMAIL_COMMA_SEPARATED_VALUES=${ALLOWED_EMAIL_COMMA_SEPARATED_VALUES:-john.doe@no.where, bowie@space.oddity}
-  if [ "$ALLOWED_EMAIL_COMMA_SEPARATED_VALUES" == "" ]
+  if [ "$ALLOWED_EMAIL_SPACE_SEPARATED_VALUES" == "" ]
   then
-    echo "env var \$ALLOWED_EMAIL_COMMA_SEPARATED_VALUES must contains edugain email of allowed user"
+    echo "env var \$ALLOWED_EMAIL_SPACE_SEPARATED_VALUES must contains edugain email of allowed user"
     exit 1
   fi
-  echo "cyclone: $ALLOWED_EMAIL_COMMA_SEPARATED_VALUES" > apache_groups
+  echo "cyclone: $ALLOWED_EMAIL_SPACE_SEPARATED_VALUES" > apache_groups
 fi
 
 
