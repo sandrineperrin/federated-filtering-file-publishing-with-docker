@@ -1,8 +1,8 @@
 #!/bin/sh
 DOCKER_IMAGE_OWNER=cyclone
 DOCKER_IMAGE_NAME=federated-filtering-proxy
-FQDN=$(       hostname -I | sed 's/ /\n/g' | grep -v 172.17 | head -n 1)
-TARGET_FQDN=$(hostname -I | sed 's/ /\n/g' | grep    172.17 | head -n 1)
+FQDN=${FQDN:-$(              hostname -I | sed 's/ /\n/g' | grep -v 172.17 | head -n 1)}
+TARGET_FQDN=${TARGET_FQDN:-$(hostname -I | sed 's/ /\n/g' | grep    172.17 | head -n 1)}
 TARGET_PORT=${TARGET_PORT:-8080}
 TARGET_PATH=${TARGET_PATH:-Insyght/}
 DEAMON_OR_ITERACTIVE=${DEAMON_OR_ITERACTIVE:-d}
