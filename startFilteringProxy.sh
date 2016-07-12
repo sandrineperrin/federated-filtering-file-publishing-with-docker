@@ -17,6 +17,16 @@ then
     rm ./apache_groups
 fi
 
+echo $DOCKER_IMAGE_OWNER
+echo $DOCKER_IMAGE_NAME
+echo $FQDN
+echo $TARGET_FQDN
+echo $TARGET_PORT
+echo $TARGET_PATH
+echo $DEAMON_OR_ITERACTIVE
+echo $SUDO_CMD
+echo $ALLOWED_EMAIL_COMMA_SEPARATED_VALUES
+
 if [ ! -e ./apache_groups ]
 then
 
