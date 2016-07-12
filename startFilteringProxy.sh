@@ -10,14 +10,24 @@ sudo mkdir -p /var/log/httpd-federated-filtering-proxy
 
 sudo service docker start
 
-#ALLOWED_EMAIL_COMMA_SEPARATED_VALUES=${ALLOWED_EMAIL_COMMA_SEPARATED_VALUES:-john.doe@no.where, bowie@space.oddity}
-
-if [ "$ALLOWED_EMAIL_COMMA_SEPARATED_VALUES" == "" ];
-	echo "env var \$ALLOWED_EMAIL_COMMA_SEPARATED_VALUES must contains edugain email of allowed user"
-	exit 1
+if [ "$ALLOWED_EMAIL_COMMA_SEPARATED_VALUES" != "" ]
+then
+    rm ./apache_groups
 fi
 
-cat "cyclone: $ALLOWED_EMAIL_COMMA_SEPARATED_VALUES" > apache_groups
+if [ ! -e ./apache_groups ]
+then
+
+  #ALLOWED_EMAIL_COMMA_SEPARATED_VALUES=${ALLOWED_EMAIL_COMMA_SEPARATED_VALUES:-john.doe@no.where, bowie@space.oddity}
+  if [ "$ALLOWED_EMAIL_COMMA_SEPARATED_VALUES" == "" ]
+  then
+    echo "env var \$ALLOWED_EMAIL_COMMA_SEPARATED_VALUES must contains edugain email of allowed user"
+    exit 1
+  fi
+  cat "cyclone: $ALLOWED_EMAIL_COMMA_SEPARATED_VALUES" > apache_groups
+fi
+
+
 
 echo "to open $TARGET_PORT:\niptables -I INPUT 1 -p tcp -i docker0 -m tcp --dport $TARGET_PORT -j ACCEPT"
 
