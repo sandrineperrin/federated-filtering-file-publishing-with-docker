@@ -8,9 +8,9 @@ TARGET_PATH=${TARGET_PATH:-Insyght/}
 DEAMON_OR_ITERACTIVE=${DEAMON_OR_ITERACTIVE:-d}
 SUDO_CMD=${SUDO_CMD:-sudo}
 
-sudo mkdir -p /var/log/httpd-federated-filtering-proxy
+$SUDO_CMD mkdir -p /var/log/httpd-federated-filtering-proxy
 
-sudo service docker start
+$SUDO_CMD service docker start
 
 if [ "$ALLOWED_EMAIL_COMMA_SEPARATED_VALUES" != "" ]
 then
