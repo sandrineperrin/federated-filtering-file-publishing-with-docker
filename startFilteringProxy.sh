@@ -24,7 +24,7 @@ then
     echo "env var \$ALLOWED_EMAIL_COMMA_SEPARATED_VALUES must contains edugain email of allowed user"
     exit 1
   fi
-  cat "cyclone: $ALLOWED_EMAIL_COMMA_SEPARATED_VALUES" > apache_groups
+  echo "cyclone: $ALLOWED_EMAIL_COMMA_SEPARATED_VALUES" > apache_groups
 fi
 
 
