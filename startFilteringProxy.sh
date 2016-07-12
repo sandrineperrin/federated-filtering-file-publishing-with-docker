@@ -5,6 +5,7 @@ FQDN=$(       hostname -I | sed 's/ /\n/g' | grep -v 172.17 | head -n 1)
 TARGET_FQDN=$(hostname -I | sed 's/ /\n/g' | grep    172.17 | head -n 1)
 TARGET_PORT=${TARGET_PORT:-8080}
 TARGET_PATH=${TARGET_PATH:-Insyght/}
+DEAMON_OR_ITERACTIVE=${DEAMON_OR_ITERACTIVE:-d}
 
 sudo mkdir -p /var/log/httpd-federated-filtering-proxy
 
@@ -34,7 +35,7 @@ echo "to open $TARGET_PORT:\niptables -I INPUT 1 -p tcp -i docker0 -m tcp --dpor
 docker rm -f federated-filtering-proxy
 docker build -t ${DOCKER_IMAGE_OWNER}/${DOCKER_IMAGE_NAME}  \
 	-f Dockerfile . &&  \
-docker run -it -p 80:80 \
+docker run -${DEAMON_OR_ITERACTIVE} -p 80:80 \
 	-e FQDN=${FQDN}  \
 	-e TARGET_FQDN=${TARGET_FQDN}  \
 	-e TARGET_PORT=${TARGET_PORT} \
