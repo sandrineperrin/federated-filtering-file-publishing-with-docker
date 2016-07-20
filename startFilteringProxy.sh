@@ -51,7 +51,9 @@ docker run -${DEAMON_OR_ITERACTIVE} -p 80:80 \
 	-e TARGET_FQDN=${TARGET_FQDN}  \
 	-e TARGET_PORT=${TARGET_PORT} \
 	-e TARGET_PATH=${TARGET_PATH} \
-	-v /var/log/httpd-federated-filtering-proxy:/var/log/httpd   \
+	-v /var/log/httpd-federated-filtering-proxy:/var/log/httpd \
+	-v ./proxy.conf:/etc/httpd/conf.d/proxy.conf:ro \
+	-v ./apache_groups:/etc/httpd/apache_groups:ro \
 	--name ${DOCKER_IMAGE_NAME}  \
 	${DOCKER_IMAGE_OWNER}/${DOCKER_IMAGE_NAME}
 
