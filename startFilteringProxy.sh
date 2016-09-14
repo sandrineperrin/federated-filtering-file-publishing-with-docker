@@ -4,7 +4,7 @@ DOCKER_IMAGE_NAME=federated-filtering-proxy
 FQDN=${FQDN:-$(              hostname -I | sed 's/ /\n/g' | grep -v 172.17 | head -n 1)}
 TARGET_FQDN=${TARGET_FQDN:-$(hostname -I | sed 's/ /\n/g' | grep    172.17 | head -n 1)}
 TARGET_PORT=${TARGET_PORT:-8080}
-TARGET_PATH=${TARGET_PATH:-/Insyght/}
+TARGET_PATH=${TARGET_PATH:-/}
 if [ -z "$1" ]
 then
 	DEFAULT_DEAMON_OR_ITERACTIVE=d
