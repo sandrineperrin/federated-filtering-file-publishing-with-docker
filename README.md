@@ -9,6 +9,7 @@ export ALLOWED_EMAIL_SPACE_SEPARATED_VALUES="john.doe@no.where bowie@space.oddit
 export DOCKERFILE=Dockerfile.debian
 
 #don't forget to adujst TARGET_FQDN, TARGET_PORT, and TARGET_PATH
+export TARGET_PATH=/
 
 ./startFilteringProxy.sh
 ```
