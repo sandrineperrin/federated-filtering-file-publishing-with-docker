@@ -33,15 +33,17 @@ then
     rm ./apache_groups
 fi
 
-echo $DOCKER_IMAGE_OWNER
-echo $DOCKER_IMAGE_NAME
-echo $FQDN
-echo $TARGET_FQDN
-echo $TARGET_PORT
-echo $TARGET_PATH
-echo $DEAMON_OR_ITERACTIVE
-echo $SUDO_CMD
-echo $ALLOWED_EMAIL_SPACE_SEPARATED_VALUES
+echo "DOCKER_IMAGE_OWNER:$DOCKER_IMAGE_OWNER"
+echo "DOCKER_IMAGE_NAME:$DOCKER_IMAGE_NAME"
+echo "FQDN:$FQDN"
+echo "TARGET_FQDN:$TARGET_FQDN"
+echo "TARGET_PORT:$TARGET_PORT"
+echo "TARGET_PATH:$TARGET_PATH"
+echo "DEAMON_OR_ITERACTIVE:$DEAMON_OR_ITERACTIVE"
+echo "SUDO_CMD:$SUDO_CMD"
+echo "ALLOWED_EMAIL_SPACE_SEPARATED_VALUES:$ALLOWED_EMAIL_SPACE_SEPARATED_VALUES"
+echo "DOCKERFILE:$DOCKERFILE"
+echo "LOG_DIR:$LOG_DIR"
 
 if [ ! -e ./apache_groups ]
 then
@@ -58,6 +60,10 @@ fi
 
 
 echo "to open $TARGET_PORT:\niptables -I INPUT 1 -p tcp -i docker0 -m tcp --dport $TARGET_PORT -j ACCEPT"
+
+echo "redirecting / to http://${TARGET_FQDN}:${TARGET_PORT}${TARGET_PATH}"
+echo "user(s) allowed:"
+cat apache_groups
 
 docker rm -f federated-filtering-proxy
 docker build -t ${DOCKER_IMAGE_OWNER}/${DOCKER_IMAGE_NAME}  \
