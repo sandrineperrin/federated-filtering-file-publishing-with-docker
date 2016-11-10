@@ -1,6 +1,7 @@
 #!/bin/sh
 DOCKER_IMAGE_OWNER=cyclone
 DOCKER_IMAGE_NAME=federated-filtering-file-publishing
+FQDN=${FQDN:-$(              hostname -I | sed 's/ /\n/g' | grep -v 172.17 | head -n 1)}
 if [ -z "$1" ]
 then
 	DEFAULT_DEAMON_OR_ITERACTIVE=d
@@ -31,6 +32,7 @@ fi
 
 echo "DOCKER_IMAGE_OWNER:$DOCKER_IMAGE_OWNER"
 echo "DOCKER_IMAGE_NAME:$DOCKER_IMAGE_NAME"
+echo "FQDN:$FQDN"
 echo "DEAMON_OR_ITERACTIVE:$DEAMON_OR_ITERACTIVE"
 echo "SUDO_CMD:$SUDO_CMD"
 echo "ALLOWED_EMAIL_SPACE_SEPARATED_VALUES:$ALLOWED_EMAIL_SPACE_SEPARATED_VALUES"
@@ -61,6 +63,7 @@ docker rm -f federated-filtering-proxy
 docker build -t ${DOCKER_IMAGE_OWNER}/${DOCKER_IMAGE_NAME}  \
 	-f ${DOCKERFILE} . &&  \
 docker run -${DEAMON_OR_ITERACTIVE} -p 80:80 \
+        -e FQDN=${FQDN} \
 	-v ${LOG_DIR}:/var/log/httpd \
 	-v $PWD/proxy.conf:/etc/httpd/conf.d/proxy.conf:ro \
 	-v $PWD/proxy.conf:/etc/apache2/conf-enabled/proxy.conf:ro \
