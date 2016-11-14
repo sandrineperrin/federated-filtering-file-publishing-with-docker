@@ -70,7 +70,10 @@ cat apache_groups
 docker stop  ${DOCKER_IMAGE_NAME}
 docker rm -v -f  ${DOCKER_IMAGE_NAME}
 docker build -t ${DOCKER_IMAGE_OWNER}/${DOCKER_IMAGE_NAME}  \
-	-f ${DOCKERFILE} . &&  \
+	-f ${DOCKERFILE} . 
+
+echo "Run federated service now "
+
 docker run -${DEAMON_OR_ITERACTIVE} -p $SERVICE_PORT:80 \
         -e FQDN=${FQDN} \
 	-v ${LOG_DIR}:/var/log/httpd \
