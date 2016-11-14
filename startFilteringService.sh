@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SITE=/root/galaxy_storage
+
 
 if [ ! -d $SITE ]; then echo "Directory not found : $SITE" ; exit 1 ; fi 
 
@@ -13,10 +13,12 @@ then
 else
 	DEFAULT_DEAMON_OR_ITERACTIVE=it
 fi
+
 DEAMON_OR_ITERACTIVE=${DEAMON_OR_ITERACTIVE:-$DEFAULT_DEAMON_OR_ITERACTIVE}
 SUDO_CMD=${SUDO_CMD:-sudo}
 DOCKERFILE=${DOCKERFILE:-Dockerfile.debian}
 LOG_DIR=${LOG_DIR:-/var/log/httpd-federated-filtering-file-publishing}
+SITE=${SITE:-/root/mydisk}
 
 if [ ! -d $LOG_DIR ]
 then
