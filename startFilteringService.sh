@@ -61,9 +61,6 @@ fi
 
 
 
-echo "to open $TARGET_PORT:\niptables -I INPUT 1 -p tcp -i docker0 -m tcp --dport $TARGET_PORT -j ACCEPT"
-
-echo "redirecting / to http://${TARGET_FQDN}:${TARGET_PORT}${TARGET_PATH}"
 echo "user(s) allowed:"
 cat apache_groups
 
