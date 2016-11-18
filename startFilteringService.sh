@@ -73,6 +73,7 @@ echo "Run federated service now "
 
 docker run -${DEAMON_OR_ITERACTIVE} -p $SERVICE_PORT:80 \
         -e FQDN=${FQDN} \
+        -e SERVICE_PORT=${SERVICE_PORT} \
 	-v ${LOG_DIR}:/var/log/httpd \
 	-v $PWD/proxy.conf:/etc/httpd/conf.d/proxy.conf:ro \
 	-v $PWD/proxy.conf:/etc/apache2/conf-enabled/proxy.conf:ro \
