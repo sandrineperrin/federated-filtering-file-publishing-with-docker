@@ -49,7 +49,7 @@ if [ ! -e ./apache_groups ]
 then
 
   #ALLOWED_EMAIL_COMMA_SEPARATED_VALUES=${ALLOWED_EMAIL_COMMA_SEPARATED_VALUES:-john.doe@no.where, bowie@space.oddity}
-  if [ "$ALLOWED_EMAIL_SPACE_SEPARATED_VALUES" == "" ]
+  if [ "$ALLOWED_EMAIL_SPACE_SEPARATED_VALUES" = "" ]
   then
     echo "env var \$ALLOWED_EMAIL_SPACE_SEPARATED_VALUES must contains edugain email of allowed user"
     exit 1
