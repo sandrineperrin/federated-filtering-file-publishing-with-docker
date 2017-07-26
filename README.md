@@ -1,7 +1,5 @@
 # federated-filtering-proxy-with-docker
 
-Access to a local directory to parse content and download results files.
-
 ```shell
 
 export DEAMON_OR_ITERACTIVE=it
