@@ -7,12 +7,10 @@ Access to a local directory to parse content and download results files.
 export DEAMON_OR_ITERACTIVE=it
 export ALLOWED_EMAIL_SPACE_SEPARATED_VALUES="john.doe@no.where bowie@space.oddity"
 
-#If you experience problem durring httpd installation, use an container based on Centos image with:
-export DOCKERFILE=Dockerfile
-
-# Set service port
-export SERVICE_PORT=8888
-export SITE=<directory_path>
+#don't forget to adujst TARGET_FQDN, TARGET_PORT, and TARGET_PATH
+export TARGET_PATH=/
+export TARGET_PORT=8080
+>>>>>>> 916f75b14c4a9742c5349c11eb6dd1cd2ac11f88
 
 ./startFilteringService.sh
 ```

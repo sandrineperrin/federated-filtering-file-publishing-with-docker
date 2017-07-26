@@ -1,22 +1,28 @@
-FROM centos:7
+FROM debian:8
 
 #will run apache
-CMD /usr/sbin/apachectl -DFOREGROUND
+CMD apache2ctl -D FOREGROUND
 
 #on port 80
 EXPOSE 80
 
-# httpd installation
-#RUN yum update -y && yum install -y httpd mod_ssl mod_wsgi nano && yum clean -y all
+RUN apt-get update && apt-get install -y \
+		apache2 \
+		nano \
+		wget \
+		gcc \
+		libjansson4 \
+		libhiredis0.10 \
+	        libcurl3 \
+	&& wget --quiet --output-document=/tmp/libcjose.deb https://github.com/pingidentity/mod_auth_openidc/releases/download/v2.0.0/libcjose_0.4.1-1_amd64.deb \
+	&& wget --quiet --output-document=/tmp/oidc.deb https://github.com/pingidentity/mod_auth_openidc/releases/download/v2.0.0/libapache2-mod-auth-openidc_2.0.0-1_amd64.deb \
+	&& dpkg -i /tmp/libcjose.deb /tmp/oidc.deb \
+	&& rm -f /tmp/oidc.deb /tmp/libcjose.deb \
+	&& rm -rf /var/lib/apt/lists/*
 
-# mod_auth_openidc installation
-#RUN yum update -y && yum install -y epel-release && yum -y --nogpgcheck localinstall https://github.com/pingidentity/mod_auth_openidc/releases/download/v1.8.8/mod_auth_openidc-1.8.8-1.el7.centos.x86_64.rpm && yum clean -y all
+RUN a2enmod \
+		auth_openidc \
+		ssl \
+		authz_groupfile \
+		proxy_http
 
-# all installation
-RUN yum update -y && yum install -y epel-release httpd && yum -y --nogpgcheck localinstall https://github.com/pingidentity/mod_auth_openidc/releases/download/v1.8.8/mod_auth_openidc-1.8.8-1.el7.centos.x86_64.rpm && yum clean -y all
-
-# config of the proxy
-#COPY ./proxy.conf /etc/httpd/conf.d/proxy.conf
-
-#allowed user
-#COPY ./apache_groups /etc/httpd/apache_groups

@@ -1,6 +1,7 @@
 #!/bin/sh
 DOCKER_IMAGE_OWNER=cyclone
 DOCKER_IMAGE_NAME=federated-filtering-file-publishing
+FQDN=${FQDN:-$(curl http://169.254.169.254/latest/meta-data/public-ipv4 2>/dev/null   )}
 FQDN=${FQDN:-$(              hostname -I | sed 's/ /\n/g' | grep -v 172.17 | head -n 1)}
 if [ -z "$1" ]
 then
@@ -43,7 +44,7 @@ if [ ! -e ./apache_groups ]
 then
 
   #ALLOWED_EMAIL_COMMA_SEPARATED_VALUES=${ALLOWED_EMAIL_COMMA_SEPARATED_VALUES:-john.doe@no.where, bowie@space.oddity}
-  if [ "$ALLOWED_EMAIL_SPACE_SEPARATED_VALUES" == "" ]
+  if [ "$ALLOWED_EMAIL_SPACE_SEPARATED_VALUES" = "" ]
   then
     echo "env var \$ALLOWED_EMAIL_SPACE_SEPARATED_VALUES must contains edugain email of allowed user"
     exit 1
