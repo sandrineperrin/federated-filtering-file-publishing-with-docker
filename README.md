@@ -9,5 +9,5 @@ export ALLOWED_EMAIL_SPACE_SEPARATED_VALUES="john.doe@no.where bowie@space.oddit
 export TARGET_PATH=/
 export TARGET_PORT=8080
 
-./startFilteringService.sh
+./startFilteringProxy.sh
 ```
