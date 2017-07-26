@@ -20,6 +20,19 @@ RUN apt-get update && apt-get install -y \
 	&& rm -f /tmp/oidc.deb /tmp/libcjose.deb \
 	&& rm -rf /var/lib/apt/lists/*
 
+# Update apache2 conf
+RUN sed -i -e '59 iServerSignature Off' -e '59 iServerTokens Prod' -e '59 iTraceEnable off' /etc/apache2/apache2.conf \
+        && sed -i -e '133 iErrorDocument 503 /errors/custom_50x.html' /etc/apache2/apache2.conf \
+        && service apache2 restart
+
+WORKDIR /var/www/html/errors/
+RUN echo '<html>' >> custom_50x.html \
+        && echo '<h1> Requested service not available. </h1>' >> custom_50x.html \
+        && echo '<p>  If the problem persists, please contact the support. </p>' >> custom_50x.html \
+        && echo '</html>' >> custom_50x.html
+
+WORKDIR /
+
 RUN a2enmod \
 		auth_openidc \
 		ssl \
